@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Blog{% endblock %}
+{% load static %}
+{% block content %} 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-semibold" href="{% url 'jobs:home' %}">Rebecca D Simmons</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+      <div class="navbar-nav mb-2 mb-lg-0">
+        <a class="nav-link" href="{% url 'jobs:home' %}">Jobs</a>
+        <a class="nav-link" href="{% static 'VP Tech Resume 2026.pdf' %}">Resume</a>
+        <a class="nav-link active" aria-current="page" href="#">Blog</a>
+        <!--a class="nav-link disabled" aria-disabled="true">Disabled</a -->
+      </div>
+    </div>
+  </div>
+</nav>
+<main role="main">
+    <div class="container">
+  <h1 class="text-center pt-3">Welcome to Rebecca's Blog</h1>
+  <br>
+  <br>
+  <h2 class="fst-italic">Latest Posts</h2>
+  <br>
+<ul class="list-unstyled">
+    {% for blog in blogs %}
+    <li class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"> 
+        <img class="img-fluid" src="{{ blog.image.url }}" aria-hidden="true" height="200" preserveAspectRatio="xMidYMid slice"
+                width="200" xmlns="http://www.w3.org/2000/svg"> 
+                <rect width="200" height="200" fill="#777"></rect>
+                        <div class="col-lg-8">
+                <a href="{% url 'blog:detail' blog.id %}"><h3 class="mb-0">{{ blog.title }}</h3></a>
+                <small class="text-body-secondary">{{ blog.pub_date_pretty }}</small>
+                <p>{{ blog.preview }}</p>
+            </div>
+    </li>
+</ul>
+ {% endfor %}
+</div>
+    </div>
+</main>
+<footer class="text-body-secondary py-5">
+    <div class="container">
+        <p class="float-end mb-1"> <a href="#">Back to top</a> </p>
+        <p class="mb-1">&copy; Rebecca D Simmons {% now "Y" %}</p>
+        <!--p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
+                href="/docs/5.3/getting-started/introduction">getting started guide</a>.</p -->
+    </div>
+</footer> 
+{% endblock %}

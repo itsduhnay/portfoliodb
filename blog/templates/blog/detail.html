@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+{% load static %}
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-semibold" href="{% url 'jobs:home' %}">Rebecca D Simmons</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+      <div class="navbar-nav mb-2 mb-lg-0">
+        <a class="nav-link" aria-current="page" href="{% url 'jobs:home' %}">Jobs</a>
+        <a class="nav-link" href="{% static 'VP Tech Resume 2026.pdf' %}">Resume</a>
+        <a class="nav-link active" href="#">Blog</a>
+        <!--a class="nav-link disabled" aria-disabled="true">Disabled</a -->
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <h1 class="text-center mt-4">{{ blog.title }}</h1>
+  <p class="text-muted">{{ blog.pub_date }}</p>
+
+  {% if blog.image %}
+    <img src="{{ blog.image.url }}" class="rounded mx-auto d-block" alt="Blog image">
+  {% endif %}
+
+  <p>{{ blog.summary }}</p>
+  <p class="float-center mb-1"> <a href="{% url 'blog:index' %}">Back to Blog List</a> </p>
+</div>
+<footer class="text-body-secondary py-5">
+    <div class="container">
+        <p class="float-end mb-1"> <a href="#">Back to top</a> </p>
+        <p class="mb-1">&copy; Rebecca D Simmons {% now "Y" %}</p>
+        <!--p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
+                href="/docs/5.3/getting-started/introduction">getting started guide</a>.</p -->
+    </div>
+</footer> 
+{% endblock %}
